@@ -20,6 +20,8 @@ public sealed class BoardResponse
 
     [JsonPropertyName("ports")]
     public required List<PortResponse> Ports { get; init; }
+    [JsonPropertyName("Thief")]
+    public required PointResponse Thief { get; init; }
 
     public static BoardResponse FromDomain(Board board)
     {
@@ -31,7 +33,8 @@ public sealed class BoardResponse
             Roads = board.GetRoads().Select(RoadResponse.FromDomain).ToList(),
             Villages = houses.Where(h => h.Type == HouseType.Village).Select(BuildingResponse.FromDomain).ToList(),
             Towns = houses.Where(h => h.Type == HouseType.Town).Select(BuildingResponse.FromDomain).ToList(),
-            Ports = board.GetPorts().Select(PortResponse.FromDomain).ToList()
+            Ports = board.GetPorts().Select(PortResponse.FromDomain).ToList(),
+            Thief = PointResponse.FromPoint(board.ThiefPosition)
         };
     }
 }
