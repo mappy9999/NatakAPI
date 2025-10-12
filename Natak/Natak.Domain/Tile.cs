@@ -9,7 +9,7 @@ public sealed class Tile(
 {
     public ResourceType Type { get; private set; } = type;
 
-    public int ActivationNumber { get; private set; } = activationNumber;
+    public int ActivationNumber { get; set; } = activationNumber;
     
     public Point Point { get; private set; } = point;
 }

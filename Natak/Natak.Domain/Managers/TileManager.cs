@@ -54,8 +54,36 @@ public sealed class TileManager
                     remainingActivationNumbers);
             }
         }
+        /// Tentative. Cannot be placed until the location of the desert is decided.
+        bool IsAbc = true;
+        if (IsAbc)
+        {
+            int[] abc = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11 };
+            Point[] points = new Point[] {
+                new Point(2, 0), new Point(1, 1), new Point(0, 2),
+                new Point(0, 3),  new Point(0, 4),  new Point(1, 4),  new Point(2, 4),
+                new Point(3, 3),  new Point(4, 2),  new Point(4, 1),  new Point(4, 0),
+                new Point(3, 0),  new Point(2, 1),  new Point(1, 2),  new Point(1, 3),
+                new Point(2, 3),  new Point(3, 2),  new Point(3, 1),  new Point(2, 2), };
+            int n = 0;
+            foreach (var point in points)
+            {
+                foreach (var tile in tiles)
+                {
+                    if (tile.Point.X == point.X && tile.Point.Y == point.Y)
+                    {
+                        if (tile.ActivationNumber != 0)
+                        {
+                            tile.ActivationNumber = abc[n++];
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
     }
-    
+
     private void AddNewTile(
         Point point,
         Dictionary<ResourceType, int> remainingResourceTileTypes,
