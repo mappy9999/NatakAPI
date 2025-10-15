@@ -50,7 +50,21 @@ public sealed class PlayerManager
         ? setupPlayerOrder[currentPlayerIndex]
         : playerOrder[currentPlayerIndex];
 
-    public List<Player> Players => [.. players.Values];
+    //public List<Player> Players => [.. players.Values];
+    // Until I can write it well in linq,
+    public List<Player> Players
+    {
+        get
+        {
+            var list = new List<Player>();
+            foreach (var order in playerOrder)
+            {
+                list.Add(players[order]);
+            }
+            return list;
+        }
+    }
+
 
     public bool IsSetup { get; set; } = true;
 
