@@ -2,7 +2,7 @@
 
 namespace Natak.API.Requests;
 
-internal sealed class BuildRoadRequest
+public sealed class BuildRoadRequest
 {
     [JsonPropertyName("firstPoint")]
     public required PointRequest FirstPoint { get; init; }

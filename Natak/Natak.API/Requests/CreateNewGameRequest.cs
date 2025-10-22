@@ -2,7 +2,7 @@
 
 namespace Natak.API.Requests;
 
-internal sealed class CreateNewGameRequest
+public sealed class CreateNewGameRequest
 {
     [JsonPropertyName("playerCount")]
     public required int PlayerCount { get; init; }
