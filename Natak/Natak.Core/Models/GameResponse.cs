@@ -56,9 +56,9 @@ public sealed class GameResponse
         ArgumentNullException.ThrowIfNull(game);
 
         var allPlayers = game.PlayerManager.Players;
-        var chosenPlayer = allPlayers.FirstOrDefault(p => (int)p.Colour == playerColour);
+        var chosenPlayer = playerColour == 0 ? null : allPlayers.FirstOrDefault(p => (int)p.Colour == playerColour);
 
-        ArgumentNullException.ThrowIfNull(chosenPlayer);
+        //ArgumentNullException.ThrowIfNull(chosenPlayer);
 
         return new GameResponse
         {
@@ -72,7 +72,7 @@ public sealed class GameResponse
                 .Select(action => (int)action!)
                 .Distinct()
                 .ToList(),
-            Player = DetailedPlayerResponse.FromDomain(chosenPlayer),
+            Player = chosenPlayer == null ? null :  DetailedPlayerResponse.FromDomain(chosenPlayer),
             Players = allPlayers
                 .Select(PlayerResponse.FromDomain)
                 .ToList(),
